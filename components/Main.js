@@ -17,28 +17,30 @@ const Main = () => {
     }
 
     const getData = async () => {
-       
-        const str = text.split(' ');
-        
-        console.log('str',str);
-        // console.log("getData call");
+        if(text == ''){
+            alert("Search field can't be empty");
+        }else{
+            const str = text.split(' ');
+            //console.log('str',str);
+            // console.log("getData call");
 
-        try {
-            const data = await fetch(`https://genius.p.rapidapi.com/search?q=${str[0]}%20${str[1]}`, {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-host": "genius.p.rapidapi.com",
-                    "x-rapidapi-key": "01119f7a0emsh936804ab3d11762p1ee7b3jsne5893f00bce6"
-                }
-            })
-            const obj = await data.json();
-            // console.log(obj);
-            console.log(obj.response.hits);
-            setSongs(
-                obj.response.hits
-            )
-        } catch (error) {
-            alert(error.message);
+            try {
+                const data = await fetch(`https://genius.p.rapidapi.com/search?q=${str[0]}%20${str[1]}`, {
+                    "method": "GET",
+                    "headers": {
+                        "x-rapidapi-host": "genius.p.rapidapi.com",
+                        "x-rapidapi-key": "01119f7a0emsh936804ab3d11762p1ee7b3jsne5893f00bce6"
+                    }
+                })
+                const obj = await data.json();
+                // console.log(obj);
+                console.log(obj.response.hits);
+                setSongs(
+                    obj.response.hits
+                )
+            } catch (error) {
+                alert(error.message);
+            }
         }
     }
 
